@@ -51,10 +51,3 @@ obtained separately. Scripts expect these inputs:
 - `Non-failed tweets/`: 0_3000 (1).csv, 3001_6000 (1).csv, 6001_all (1).csv
  
 
-
-
-LIWC-22 scoring (default dictionary) over the combined corpus of
-81,854 person-month documents in `Failed tweets/cleaned/liwc_input/`,
-exported as CSV keyed by filename. Scoring output is joined back via the
-two manifests to build the estimation panel.
-
