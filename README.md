@@ -7,9 +7,10 @@ LIWC-22 text scoring.
 
 ## Structure
 
-Scripts live inside their own data folder and must be run from there
-(set the working directory to the script's folder, or use Session >
-Set Working Directory).
+Scripts 01-04 run from inside their own data folder (set the working
+directory to the script's folder, or use Session > Set Working
+Directory). Script 05 runs from the common parent of both folders
+(this repository root).
 
     Failed tweets/
       01_clean_failed_tweets.R        raw batches -> tweet-level cleaned data
@@ -29,25 +30,34 @@ shared scoring folder.
 
 R (tested on 4.5.1) with:
 
-install.packages(c("tidyverse", "readxl"))
-
+    install.packages(c("tidyverse", "readxl"))
 
 ## Run order
 
-1. `01` -> 2. `02` -> 3. `03` (in `Failed tweets`)
-2. `04` -> `05` (in `Non-failed tweets`)
+1. `01` -> `02` -> `03`  (working directory: `Failed tweets`)
+2. `04`                  (working directory: `Non-failed tweets`)
+3. `05`                  (working directory: overarching data repository root)
 
-Script 05 reads the treated sample's timing file from the sibling folder
-(`../Failed tweets/cleaned/`), so both folders must sit side by side
-under a common parent, as in this repository.
+Script 05 reads the treated sample's timing file and the control data
+through explicit relative paths, so the two project folders must sit
+side by side under the common parent, as in this repository.
 
 ## Data (not in this repository)
 
-Raw and cleaned tweet data are excluded  and must be
+Raw and cleaned tweet data are excluded via `.gitignore` and must be
 obtained separately. Scripts expect these inputs:
 
-- `Failed tweets/`: Batch1_before_tweets.xlsx, Batch1_after_tweets.xlsx
-  , Batch2_before_tweets.csv, Batch2_after_tweets.csv
-- `Non-failed tweets/`: 0_3000 (1).csv, 3001_6000 (1).csv, 6001_all (1).csv
+- `Failed tweets/`: Batch1_before_tweets.xlsx, Batch1_after_tweets.xlsx,
+  Batch2_before_tweets.csv, Batch2_after_tweets.csv
+- `Non-failed tweets/`: 0_3000 (1).csv, 3001_6000 (1).csv,
+  6001_all (1).csv
+
+## Pending step
+
+LIWC-22 scoring (default dictionary) over the combined corpus of
+81,854 person-month documents in `Failed tweets/cleaned/liwc_input/`,
+exported as CSV keyed by filename. Scoring output is joined back via
+the two manifests to build the estimation panel.
+
  
 
